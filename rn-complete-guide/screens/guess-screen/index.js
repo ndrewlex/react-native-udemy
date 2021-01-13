@@ -42,14 +42,6 @@ const GuessNumberScreen = () => {
     );
   }
 
-  content = (
-    <GameOverScreen
-      guessNumber={guessRounds}
-      userNumber={userNumber}
-      onRestart={newGameHandler}
-    />
-  );
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={style.container}>{content}</View>

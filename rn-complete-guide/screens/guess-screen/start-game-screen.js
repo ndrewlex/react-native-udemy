@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button, Alert, Keyboard } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Alert,
+  Keyboard,
+  Dimensions,
+} from "react-native";
+import MainButton from "../../components/MainButton";
 import NumberContainer from "../../components/NumberContainer";
 import colors from "../../constants/colors";
 import defaultStyle from "../../constants/default-style";
@@ -42,10 +51,9 @@ const StartGameScreen = ({ onStartGame }) => {
       <Card style={style.summaryContainer}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button
-          title="Start the game!"
-          onPress={() => onStartGame(selectedNumber)}
-        />
+        <MainButton onPress={() => onStartGame(selectedNumber)}>
+          Start the game!
+        </MainButton>
       </Card>
     );
   }
@@ -56,7 +64,7 @@ const StartGameScreen = ({ onStartGame }) => {
         Start A New Game
       </Text>
       <Card style={style.inputContainer}>
-        <Text style={defaultStyle.bodyText}>Select A Number</Text>
+        <Text style={{ ...defaultStyle.bodyText }}>Select A Number</Text>
         <Input
           style={style.textInput}
           autoCapitalize="none"
@@ -68,14 +76,14 @@ const StartGameScreen = ({ onStartGame }) => {
           onChangeText={numberInputHandler}
         />
         <View style={style.buttonContainer}>
-          <View style={style.btn}>
+          <View style={style.button}>
             <Button
               title="Reset"
               onPress={resetInputHandler}
               color={colors.primary}
             />
           </View>
-          <View style={style.btn}>
+          <View style={style.button}>
             <Button
               title="Confirm"
               onPress={confirmInputHandler}
@@ -91,34 +99,38 @@ const StartGameScreen = ({ onStartGame }) => {
 
 const style = StyleSheet.create({
   container: {
+    flex: 1,
+    width: "100%",
     alignItems: "center",
+    padding: 10,
   },
   title: {
     fontSize: 20,
     marginVertical: 10,
     textAlign: "center",
+    fontFamily: "open-sans-bold",
   },
   textInput: {
     textAlign: "center",
     width: 50,
   },
   inputContainer: {
-    width: 300,
-    maxWidth: "80%",
+    width: "80%",
+    maxWidth: "95%",
+    minWidth: 300,
     alignItems: "center",
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    paddingHorizontal: 15,
   },
   summaryContainer: {
     marginTop: 20,
     alignItems: "center",
   },
-  btn: {
-    width: 100,
+  button: {
+    width: Dimensions.get("window").width / 4,
   },
 });
 export default StartGameScreen;
